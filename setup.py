@@ -5,8 +5,8 @@ import sys
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
 
-with open(os.path.join(os.path.dirname(__file__), '.version')) as f:
-    version = f.read()
+import sloc
+version = sloc.VERSION
 
 
 class PyTest(TestCommand):

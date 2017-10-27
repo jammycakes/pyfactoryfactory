@@ -1,6 +1,6 @@
 .PHONY: test build release upload upload-test venv
 
-VERSION = $(shell cat .version)
+VERSION = $(shell python -c "import sloc;print(sloc.VERSION)")
 
 test:
 	python3 setup.py test -a tests

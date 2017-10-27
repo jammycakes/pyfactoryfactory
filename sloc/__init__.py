@@ -2,8 +2,9 @@
 Miscellaneous utility files
 """
 
-import inspect
+VERSION = '0.1.1'
 
+import inspect
 
 class ServiceLocator(object):
 
