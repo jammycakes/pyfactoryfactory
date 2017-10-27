@@ -1,6 +1,8 @@
 sloc - a simple service locator in Python
 =========================================
 
+[![Build Status][shield-travis]][info-travis]
+
 sloc is a simple implementation of the Service Locator pattern.
 
 It works by providing a hybrid of the Dependency Injection and Service Locator
@@ -118,3 +120,6 @@ users2 = locator.get(UserService) # This will use Amazon DynamoDB
 
 Note that your class must inherit from `Serviceable` if it is to have the
 `services` locator injected into it.
+
+[info-travis]:   https://travis-ci.org/jammycakes/sloc
+[shield-travis]: https://img.shields.io/travis/jammycakes/sloc.svg
