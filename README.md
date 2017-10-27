@@ -1,15 +1,17 @@
 factoryfactory - a simple service locator in Python
-=========================================
+===================================================
 
 [![Build Status][shield-travis]][info-travis]
 
 factoryfactory is a simple implementation of the Service Locator pattern.
 
-It works by providing a hybrid of the Dependency Injection and Service Locator
+It is actually a hybrid of the Dependency Injection and Service Locator
 patterns. The service locator itself is injected into the services that it
 creates, but the services themselves then issue requests to it for the
 dependencies that they require. This allows you much more control over the
 lifecycles of these dependencies.
+
+The name is inspired by the classic article, "[Why I Hate Frameworks](http://discuss.joelonsoftware.com/default.asp?joel.3.219431.12)".
 
 Usage
 -----
