@@ -1,9 +1,9 @@
-sloc - a simple service locator in Python
+factoryfactory - a simple service locator in Python
 =========================================
 
 [![Build Status][shield-travis]][info-travis]
 
-sloc is a simple implementation of the Service Locator pattern.
+factoryfactory is a simple implementation of the Service Locator pattern.
 
 It works by providing a hybrid of the Dependency Injection and Service Locator
 patterns. The service locator itself is injected into the services that it
@@ -17,9 +17,9 @@ Usage
 To create a service locator:
 
 ```
-import sloc
+import factoryfactory
 
-locator = sloc.ServiceLocator()
+locator = factoryfactory.ServiceLocator()
 ```
 
 To instantiate a service:
@@ -99,7 +99,7 @@ inheritance), the service locator will inject an instance of itself into the
 you can resolve dependencies in the constructor:
 
 ```
-class UserService(sloc.Serviceable):
+class UserService(factoryfactory.Serviceable):
 
     def __init__(self):
         self.repository = self.services.get(UserRepository)
@@ -109,9 +109,9 @@ The `Serviceable` class comes with a default service locator in its `services`
 property, so if you instantiate your service directly, it will use this:
 
 ```
-sloc.Serviceable.services.register(UserRepository, PostgresqlRepository)
+factoryfactory.Serviceable.services.register(UserRepository, PostgresqlRepository)
 
-locator = sloc.ServiceLocator()
+locator = factoryfactory.ServiceLocator()
 locator.register(UserRepository, DynamoDBRepository)
 
 users1 = UserService()            # This will use Postgresql
@@ -121,5 +121,5 @@ users2 = locator.get(UserService) # This will use Amazon DynamoDB
 Note that your class must inherit from `Serviceable` if it is to have the
 `services` locator injected into it.
 
-[info-travis]:   https://travis-ci.org/jammycakes/sloc
-[shield-travis]: https://img.shields.io/travis/jammycakes/sloc.svg
+[info-travis]:   https://travis-ci.org/jammycakes/factoryfactory
+[shield-travis]: https://img.shields.io/travis/jammycakes/factoryfactory.svg

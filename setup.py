@@ -5,8 +5,8 @@ import sys
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
 
-import sloc
-version = sloc.VERSION
+import factoryfactory
+version = factoryfactory.VERSION
 
 
 class PyTest(TestCommand):
@@ -29,15 +29,15 @@ class PyTest(TestCommand):
 
 
 setup(
-    name='sloc',
-    packages=['sloc'],
+    name='factoryfactory',
+    packages=['factoryfactory'],
     version=version,
     description='A simple service locator in Python',
     author='James McKay',
     author_email='code@jamesmckay.net',
     keywords=['service-location', 'inversion-of-control', 'ioc'],
-    url='https://github.com/jammycakes/sloc',
-    download_url = 'https://github.com/jammycakes/sloc/archive/{0}.tar.gz'.format(version),
+    url='https://github.com/jammycakes/factoryfactory',
+    download_url = 'https://github.com/jammycakes/factoryfactory/archive/{0}.tar.gz'.format(version),
     license='MIT',
     install_requires=[],
     zip_safe=False,
