@@ -6,12 +6,40 @@ VERSION = '0.1.2'
 
 import inspect
 
+class Reference(object):
+
+    def __init__(self, obj):
+        self.obj = obj
+
+    def __eq__(self, other):
+        return self.obj == other.obj
+
+    def __hash__(self):
+        if self.obj.__hash__:
+            return hash(self.obj)
+        else:
+            return id(self.obj)
+
+
 class ServiceLocator(object):
 
     def __init__(self):
         self.providers = {}
         self.singletons = {}
 
+    def _get_provider(self, key):
+        result = self.providers.get(Reference(key))
+        return result if result else None
+
+    def _set_provider(self, key, provider):
+        self.providers[Reference(key)] = provider
+
+    def _get_singleton(self, key):
+        result = self.singletons.get(Reference(key))
+        return result if result else None
+
+    def _set_singleton(self, key, singleton):
+        self.singletons[Reference(key)] = singleton
 
     def _get_instantiator(self, provider):
 
@@ -48,28 +76,28 @@ class ServiceLocator(object):
         """
 
         def get_singleton(*args, **kwargs):
-            result = self.singletons.get(service)
+            result = self._get_singleton(service)
             if not result:
                 instantiator = self._get_instantiator(provider)
                 result = instantiator(*args, **kwargs)
-                self.singletons[service] = result
+                self._set_singleton(service, result)
             return result
 
         # Providers are always registered in self.providers  as callable methods
 
         if not callable(provider):
-            self.providers[service] = lambda *args, **kwargs: provider
+            self._set_provider(service, lambda *args, **kwargs: provider)
         elif singleton:
-            self.providers[service] = get_singleton
+            self._set_provider(service, get_singleton)
         else:
-            self.providers[service] = self._get_instantiator(provider)
+            self._set_provider(service, self._get_instantiator(provider))
 
 
     def __getitem__(self, service):
         """
         Returns a function that returns the requested service.
         """
-        provider = self.providers.get(service)
+        provider = self._get_provider(service)
         if provider:
             return provider
         elif callable(service):

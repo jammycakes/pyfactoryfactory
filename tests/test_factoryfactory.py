@@ -61,3 +61,18 @@ class TestServiceLocator(unittest.TestCase):
         sl.register('Hello', lambda *args, **kwargs: 'World')
         a = sl.get('Hello')
         self.assertEqual('World', a)
+
+    def test_locate_os_environ(self):
+        sl = factoryfactory.ServiceLocator()
+        import os
+        a = sl.get(os.environ)
+        self.assertEqual(os.environ, a)
+
+    def test_swap_os_environ(self):
+        sl = factoryfactory.ServiceLocator()
+        import os
+        dc = { 'a': 'b' }
+        sl.register(os.environ, dc)
+        a = sl.get(os.environ)
+        self.assertEqual(dc, a)
+        self.assertNotEqual(os.environ, a)
