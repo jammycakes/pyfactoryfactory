@@ -123,5 +123,5 @@ users2 = locator.get(UserService) # This will use Amazon DynamoDB
 Note that your class must inherit from `Serviceable` if it is to have the
 `services` locator injected into it.
 
-[info-travis]:   https://travis-ci.org/jammycakes/factoryfactory
-[shield-travis]: https://img.shields.io/travis/jammycakes/factoryfactory.svg
+[info-travis]:   https://travis-ci.org/jammycakes/pyfactoryfactory
+[shield-travis]: https://img.shields.io/travis/jammycakes/pyfactoryfactory.svg
